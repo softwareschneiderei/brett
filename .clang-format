@@ -1,0 +1,20 @@
+﻿---
+BasedOnStyle: Google
+BreakBeforeBraces: Allman
+AlignAfterOpenBracket: DontAlign
+Standard: Cpp11
+IndentWidth: 2
+TabWidth: 2
+UseTab: Never
+AllowShortLambdasOnASingleLine: None
+AllowShortFunctionsOnASingleLine: None
+ConstructorInitializerIndentWidth: 0
+AccessModifierOffset: -2
+BreakConstructorInitializersBeforeComma: true
+ContinuationIndentWidth: 2
+PointerAlignment: Left
+DerivePointerAlignment: false
+AllowShortBlocksOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
+ColumnLimit: 120
+...

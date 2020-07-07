@@ -5,6 +5,8 @@ add_library(brett
   ../include/brett/discrete_curve.hpp
   discrete_curve.cpp
   ../include/brett/select_overload.hpp
+  ../include/brett/string_operations.hpp
+  string_operations.cpp
   ../include/brett/version_info.hpp)
 
 target_include_directories(brett

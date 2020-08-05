@@ -6,7 +6,7 @@
 namespace
 {
 
-std::pair<std::string::size_type, std::size_t> findNextOf(
+std::pair<std::string::size_type, std::size_t> find_next_of(
   std::string const& text, std::size_t offset,
   std::vector<std::string> const& search)
 {
@@ -79,7 +79,7 @@ std::vector<std::string> brett::split(
 
   std::vector<std::string> result;
   auto last = std::string::size_type(0);
-  auto x = findNextOf(message, 0, delimiter);
+  auto x = find_next_of(message, 0, delimiter);
 
   while (true)
   {
@@ -94,7 +94,7 @@ std::vector<std::string> brett::split(
     }
 
     last = x.second;
-    x = findNextOf(message, last, delimiter);
+    x = find_next_of(message, last, delimiter);
   }
 
   return result;
@@ -113,6 +113,7 @@ std::vector<std::string> brett::split(std::string const& text, std::string const
 {
   std::vector <std::string> result;
 
+  auto const skip = delimiter.length();
   std::size_t position = 0;
   do
   {
@@ -122,7 +123,7 @@ std::vector<std::string> brett::split(std::string const& text, std::string const
       break;
 
     result.push_back(text.substr(position, split - position));
-    position = split + 1;
+    position = split + skip;
 
   } while (true);
 

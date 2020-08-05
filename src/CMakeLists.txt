@@ -3,6 +3,7 @@ set(HEADER_FILES
   ../include/brett/background_worker.hpp
   ../include/brett/cancellation_token.hpp
   ../include/brett/discrete_curve.hpp
+  ../include/brett/overloaded.hpp
   ../include/brett/preempting_background_worker.hpp
   ../include/brett/select_overload.hpp
   ../include/brett/string_operations.hpp

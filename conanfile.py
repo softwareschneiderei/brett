@@ -2,8 +2,8 @@ from conans import ConanFile, CMake, tools
 
 
 class BrettConan(ConanFile):
-    name = "Brett"
-    version = "0.1"
+    name = "brett"
+    version = "0.2"
     license = "MIT"
     author = "Marius Elvert marius.elvert@softwareschneiderei.de"
     url = "https://github.com/softwareschneiderei/brett"

@@ -1,4 +1,6 @@
 add_library(brett
+  ../include/brett/aligned_allocator.hpp
+  aligned_allocator.cpp
   ../include/brett/background_worker.hpp
   background_worker.cpp
   ../include/brett/cancellation_token.hpp

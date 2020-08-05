@@ -1,20 +1,29 @@
-add_library(brett
+set(HEADER_FILES
   ../include/brett/aligned_allocator.hpp
-  aligned_allocator.cpp
   ../include/brett/background_worker.hpp
-  background_worker.cpp
   ../include/brett/cancellation_token.hpp
   ../include/brett/discrete_curve.hpp
-  discrete_curve.cpp
   ../include/brett/preempting_background_worker.hpp
-  preempting_background_worker.cpp
   ../include/brett/select_overload.hpp
   ../include/brett/string_operations.hpp
-  string_operations.cpp
   ../include/brett/version_info.hpp)
+
+add_library(brett
+  aligned_allocator.cpp
+  background_worker.cpp
+  discrete_curve.cpp
+  preempting_background_worker.cpp
+  string_operations.cpp)
 
 target_include_directories(brett
   PUBLIC ../include)
 
 target_link_libraries(brett
   PUBLIC pthread)
+
+install(FILES ${HEADER_FILES}
+  DESTINATION include/brett)
+
+install(TARGETS brett
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib)

@@ -15,7 +15,7 @@ public:
   cancellation_token& operator=(cancellation_token const&) = default;
   cancellation_token& operator=(cancellation_token&&) = default;
 
-  bool is_cancellation_requested() const
+  [[nodiscard]] bool is_cancellation_requested() const
   {
     return state_ && *state_;
   }
@@ -44,6 +44,8 @@ public:
     *state_ = true;
   }
 
+  /** Mark all connected tokens as cancelled and sever the connection to them.
+   */
   void cancel_and_reset()
   {
     auto other = std::make_shared<std::atomic_bool>(false);
@@ -51,12 +53,12 @@ public:
     *other = true;
   }
 
-  bool is_cancellation_requested() const
+  [[nodiscard]] bool is_cancellation_requested() const
   {
     return state_ && *state_;
   }
 
-  cancellation_token token() const
+  [[nodiscard]] cancellation_token token() const
   {
     return cancellation_token(state_);
   }

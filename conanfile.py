@@ -14,7 +14,7 @@ class BrettConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake"
     exports_sources = "src/*", "include/*", "tests/*", "CMakeLists.txt"
-    build_requires = "Catch2/2.7.2@catchorg/stable",
+    build_requires = "catch2/2.13.2",
 
     def _configured_cmake(self):
         cmake = CMake(self)

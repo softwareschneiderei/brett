@@ -7,4 +7,4 @@ add_executable(brett_tests
 
 target_link_libraries(brett_tests
   PUBLIC brett
-  PUBLIC CONAN_PKG::Catch2)
+  PUBLIC CONAN_PKG::catch2)

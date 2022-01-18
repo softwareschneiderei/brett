@@ -19,6 +19,9 @@ add_library(brett
 target_include_directories(brett
   PUBLIC ../include)
 
+target_link_libraries(brett
+  PUBLIC Threads::Threads)
+
 install(FILES ${HEADER_FILES}
   DESTINATION include/brett)
 

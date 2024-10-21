@@ -1,4 +1,6 @@
-from conans import ConanFile, CMake, tools
+from conan import ConanFile
+from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout
+from conan.tools.files import copy
 
 
 class BrettConan(ConanFile):
@@ -11,21 +13,22 @@ class BrettConan(ConanFile):
     topics = ("utilities",)
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
-    default_options = "shared=False"
-    generators = "cmake"
+    default_options = {"shared": False}
+    generators = "CMakeDeps"
     exports_sources = "src/*", "include/*", "tests/*", "CMakeLists.txt"
-    build_requires = "catch2/2.13.2",
+    test_requires = "catch2/2.13.10",
 
-    def _configured_cmake(self):
-        cmake = CMake(self)
-        cmake.configure(source_folder=".")
-        return cmake
+    def layout(self):
+        cmake_layout(self)
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.generate()
 
     def build(self):
-        self._configured_cmake().build()
-
-    def package(self):
-        self._configured_cmake().install()
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
 
     def package_info(self):
         self.cpp_info.libs = ["brett"]

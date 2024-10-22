@@ -3,3 +3,8 @@
 /.idea/
 
 /build/
+/.vs/
+/CMakeUserPresets.json
+
+
+/test_package/build/

@@ -42,4 +42,4 @@ class BrettConan(ConanFile):
     def package_info(self):
         self.cpp_info.libs = ["brett"]
         if self.settings.os == "Linux":
-            self.cpp_info.libs += ["pthread"]
+            self.cpp_info.system_libs += ["pthread"]

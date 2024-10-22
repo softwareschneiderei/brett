@@ -1,10 +1,9 @@
-#include <brett/discrete_curve.hpp>
 #include <algorithm>
+#include <brett/discrete_curve.hpp>
 #include <cassert>
 #include <cmath>
 #include <numeric>
 #include <stdexcept>
-
 
 namespace
 {
@@ -12,28 +11,24 @@ using namespace brett;
 constexpr double PI = 3.141592653589793238463;
 }  // namespace
 
-
-discrete_curve brett::gauss(
-  discrete_curve const& data, double sigma)
+discrete_curve brett::gauss(discrete_curve const& data, double sigma)
 {
   auto constexpr STANDARD_DEVIATIONS_IN_RADIUS = 3.0;
-  auto kernel = gauss_kernel(std::ceil(STANDARD_DEVIATIONS_IN_RADIUS*sigma), sigma);
+  auto kernel = gauss_kernel(static_cast<std::size_t>(std::ceil(STANDARD_DEVIATIONS_IN_RADIUS * sigma)), sigma);
 
   return convolve(data, kernel);
 }
 
-
-discrete_curve brett::convolve(
-  discrete_curve const& data, discrete_curve const& kernel)
+discrete_curve brett::convolve(discrete_curve const& data, discrete_curve const& kernel)
 {
   if (data.empty())
     return data;
 
   // Apply a convolution with clampeing border handling
   assert(kernel.size() > 0 && kernel.size() & 1);
-  int delta = kernel.size() / 2;
-  auto N = static_cast<int>(data.size());
   auto M = static_cast<int>(kernel.size());
+  auto N = static_cast<int>(data.size());
+  int delta = M / 2;
   auto highest = N - 1;
   discrete_curve result(data.size());
   for (int i = 0; i < N; ++i)
@@ -56,7 +51,6 @@ discrete_curve brett::convolve(
   return result;
 }
 
-
 double brett::interpolate(discrete_curve const& data, double x)
 {
   if (data.empty())
@@ -78,9 +72,7 @@ double brett::interpolate(discrete_curve const& data, double x)
   return data[i] + lambda * (data[j] - data[i]);
 }
 
-
-double brett::find_relative(
-  discrete_curve const& ascending_values, double which)
+double brett::find_relative(discrete_curve const& ascending_values, double which)
 {
   if (ascending_values.empty())
   {
@@ -91,8 +83,7 @@ double brett::find_relative(
   if (which >= ascending_values.back())
     return static_cast<double>(ascending_values.size() - 1);
 
-  auto right =
-    std::lower_bound(ascending_values.begin(), ascending_values.end(), which);
+  auto right = std::lower_bound(ascending_values.begin(), ascending_values.end(), which);
   auto left = right - 1;
 
   auto begin = *left;
@@ -103,10 +94,9 @@ double brett::find_relative(
   return relative + (left - ascending_values.begin());
 }
 
-
 discrete_curve brett::gauss_kernel(std::size_t half_extends, double standard_deviation)
 {
-  if(standard_deviation <= 0.0)
+  if (standard_deviation <= 0.0)
   {
     throw std::runtime_error("Invalid standard deviation");
   }
